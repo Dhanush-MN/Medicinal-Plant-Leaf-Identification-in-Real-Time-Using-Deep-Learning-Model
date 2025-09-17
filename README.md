@@ -1,0 +1,2 @@
+# Medicinal-Plant-Leaf-Identification-in-Real-Time-Using-Deep-Learning-Model
+This project focuses on building a real-time medicinal plant identification system that can classify plant species using leaf images and display relevant details about the plant. It combines deep learning (CNN - MobileNetV2), Flask web framework, and a SQLite database to provide an end-to-end solution that is fast, scalable, and user-friendly.
