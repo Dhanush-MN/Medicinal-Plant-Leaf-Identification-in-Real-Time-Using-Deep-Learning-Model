@@ -1,0 +1,32 @@
+body {
+  background: linear-gradient(180deg, #eafbee, #ffffff);
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+.navbar {
+  border-bottom: 2px solid #e2f3e4;
+}
+.card {
+  border-radius: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+.btn-success {
+  background: #28a745;
+  border: none;
+}
+.btn-success:hover {
+  background: #218838;
+}
+.login-card {
+  max-width: 400px;
+  border-radius: 15px;
+  background: #ffffff;
+}
+.result-card {
+  text-align: center;
+  min-height: 350px;
+}

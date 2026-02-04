@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Register | Medicinal Leaf{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div class="card shadow-lg p-4 login-card">
+    <h3 class="text-center text-success fw-bold mb-4">Create Your Account 🌱</h3>
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="Choose username" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Create password" required>
+      </div>
+      <button class="btn btn-success w-100 py-2 fw-semibold">Register</button>
+      <div class="text-center mt-3">
+        <small>Already have an account? <a href="/login" class="text-decoration-none text-success fw-semibold">Login</a></small>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

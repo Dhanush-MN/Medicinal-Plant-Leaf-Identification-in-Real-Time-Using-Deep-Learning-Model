@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}History | Medicinal Leaf{% endblock %}
+{% block content %}
+<div class="card shadow-sm p-4">
+  <h4 class="fw-bold text-success mb-4">📜 Prediction History</h4>
+  {% if rows %}
+  <table class="table table-bordered table-striped">
+    <thead class="table-success">
+      <tr><th>Image</th><th>Predicted Leaf</th><th>Confidence</th><th>Date</th></tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td>{{ r[0] }}</td>
+        <td class="fw-semibold">{{ r[1] }}</td>
+        <td>{{ (r[2]*100)|round(1) }}%</td>
+        <td>{{ r[3] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-muted">No history found yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

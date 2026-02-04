@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | Medicinal Leaf{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-md-6">
+    <div class="card p-4 shadow-sm">
+      <h5 class="text-success fw-bold mb-3">🎥 Live Leaf Capture</h5>
+      <video id="video" autoplay playsinline class="border rounded" style="width:100%; height:300px; background:black;"></video>
+      <button id="snap" class="btn btn-success mt-3 w-100 fw-semibold">Capture & Predict</button>
+    </div>
+
+    <div class="card p-4 shadow-sm mt-4">
+      <h5 class="text-success fw-bold mb-3">📷 Upload Leaf Image</h5>
+      <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" class="form-control mb-3">
+        <button class="btn btn-primary w-100 fw-semibold">Upload & Predict</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card p-4 shadow-sm result-card">
+      <h5 class="text-success fw-bold mb-3">🌿 Prediction Result</h5>
+      <div id="result" class="text-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" width="80" class="mb-3">
+        <h6 class="text-muted">No prediction yet.</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const video=document.getElementById('video');
+navigator.mediaDevices.getUserMedia({video:true}).then(s=>video.srcObject=s);
+document.getElementById('snap').onclick=async()=>{
+  const c=document.createElement('canvas');c.width=video.videoWidth;c.height=video.videoHeight;
+  c.getContext('2d').drawImage(video,0,0);
+  const data=c.toDataURL('image/jpeg');
+  const r=await fetch('/predict_base64',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:data})});
+  const j=await r.json();
+  document.getElementById('result').innerHTML=`<h4 class='fw-bold text-success'>${j.label}</h4><p>Confidence: ${(j.confidence*100).toFixed(1)}%</p><p>${j.info.benefits}</p>`;
+};
+document.getElementById('uploadForm').onsubmit=async(e)=>{
+  e.preventDefault();
+  const fd=new FormData(e.target);
+  const r=await fetch('/upload',{method:'POST',body:fd});
+  const j=await r.json();
+  document.getElementById('result').innerHTML=`<h4 class='fw-bold text-success'>${j.label}</h4><p>Confidence: ${(j.confidence*100).toFixed(1)}%</p><p>${j.info.benefits}</p>`;
+};
+</script>
+{% endblock %}
